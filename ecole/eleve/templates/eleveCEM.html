@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<head>
+  {% load static%}
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mes élèves</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}"> 
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  
+    <script src="{% static 'js/search.js' %}"></script>  
+    <script src="{% static 'js/snippets.js' %}"></script>  
+    <link rel="icon" type="image/x-icon" href=" {% static 'img/favicon.ico'%}">
+
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+-->
+</head>
+<body>
+      <main style="margin-top: 0px;">
+
+            <div class="row">
+                <div class="col align-self-center">
+                    <nav class="navbar navbar-expand-lg navbar-light mb-3"  style="background-color: #e3f2fd;">
+                      <div class="container-fluid">
+                        <a class="navbar-brand" href="#"><strong>La Liste Des élèves du CEM de Prosperity 1</strong></a>
+                        <a type="button" href='{% url 'ajoutereleveCEM' %}' class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajoutereleveCEM">Ajouter<i class="bi bi-clipboard-plus-fill"></i></a>
+                        <a onclick="printDiv('print-content')" class="btn btn-warning">Imprimer<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <a href="{% url 'home' %}" class="btn btn-info">Acceuil<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <a href="{% url 'logout' %}" class="btn btn-danger">Déconnecter<i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <a href="{% url 'specialitiess' %}" class="btn btn-close"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                      </div>
+                      </nav>
+                      <div id="print-content">
+                        <form>
+                      <table class="table table-hover mt-2" name="printDiv" id="example1" class="table table-striped" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Genre</th>
+                            <th scope="col">N'Télephone</th>
+                            <th scope="col">Année Scolaire</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Nom du Prof</th>
+                            <th scope="col">Paiement</th>
+                            <th scope="col">Statut</th>
+
+                            <th scope="col" class="text-center">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for i in eleveCEM%}
+
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ i.nom_eleveMCEM }}</td>
+                            <td>{{ i.prenom_eleveMCEM  }}</td>
+                            <td>{{ i.age_eleveMCEM  }}</td>
+                            <td>{{ i.genre_eleveMCEM  }}</td>
+                            <td>{{ i.num_tel_parentMCEM  }}</td>
+                            <td>{{ i.anneescol_eleveMCEM  }}</td>
+                            <td>{{ i.descr_eleveMCEM  }}</td>
+                            <td>{{ i.nom_profMCEM }}</td>
+                            <td>{{ i.frais_eleveMCEM  }}</td>
+                            <td>{{ i.statut_eleveMCEM  }}</td>
+
+                            <td class="text-center">
+                              <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modifiereleveCEM-{{forloop.counter}}">M<i class="bi bi-clipboard-plus-fill"></i></a>
+                              <a type="button" class="btn btn-danger" href='{% url 'supprimereleveCEM' i.id  %}' ><i class="bi bi-trash3-fill">S</i></a>
+                              </td>
+                          </tr>
+                          {% endfor %}
+
+                        </tbody>
+                      </table>
+                    </form>
+                  </div>
+                </div>
+            </div>
+    
+<!--Ajouter un eleve-->
+<div class="modal fade" id="ajoutereleveCEM" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalToggleLabel">Ajouter Un élève</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form method="post" action="{% url 'ajoutereleveCEM' %}">
+            {% csrf_token %}
+              <div class="mb-3">
+              <div class="form-text"><strong>Informations Génerales</strong></div>
+                <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="nomCEM" placeholder="Nom d'élève">
+                <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="prenomCEM" placeholder="Prenom d'élève">
+               <!-- <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="genreCEM" placeholder="Genre">-->
+               <select class="form-select" aria-label="Genre" name="genreCEM" placeholder="Genre">
+                <option value="Garçon">Garçon</option>
+                <option value="Fille">Fille</option>
+              </select>
+              <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="numtelCEM" placeholder="N'Télephone">
+                 <!-- <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock"  name="anneescolCEM" placeholder="Année Scolaire">  -->
+                 <select class="form-select" aria-label="Année Scolaire"  name="anneescolCEM" placeholder="Année Scolaire">
+                  <option value="1ere Année">1ere Année</option>
+  
+                  <option value="2eme Année">2eme Année</option>
+  
+                  <option value="3eme Année">3eme Année </option>
+  
+                  <option value="4eme Année">4eme Année</option>
+                </select>  
+                 <input type="number" min="1" step="1" class="form-control mt-2" name="ageCEM" placeholder="Age d'eleve">            
+                <input type="describedby" class="form-control mt-2" aria-describedby="textHelpBlock"  name="descriptionCEM" placeholder="description"> 
+                <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="nomProfCEM" placeholder="Nom du Prof">             
+                 <!-- <input type="text" class="form-control mt-2" name="fraisCEM" aria-describedby="textHelpBlock" placeholder="Frais de Paiement">-->
+                 <select class="form-select" aria-label="frais" name="fraisCEM" placeholder="Frais de Paiement">
+                  <option value="Payé 1 seance">Payé 1 seance</option>
+                  <option value="Payé 2 seances">Payé 2 seances</option>
+                  <option value="Payé 3 seances">Payé 3 seances</option>
+                  <option value="Payé 4 seances">Payé 4 seances</option>
+                  <option value="non Payé">Non Payé</option>
+                </select>
+              </select>
+              <select class="form-select" aria-label="statut" name="statutCEM" placeholder="Statut d'eleve">
+              <option value="En action">En action</option>
+              <option value="N'est pas en action">N'est pas en action</option>
+            </select>
+            </div>
+          
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-dismiss="modal">Valider</button>
+      </div>
+    </form> 
+  </div>
+    </div>
+  </div>
+</div>
+  <!--Modifier un eleve-->
+  {% for i in eleveCEM %}
+  <div class="modal fade" id="modifiereleveCEM-{{forloop.counter}}" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel"><strong>Modifier L'élève</strong></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addm-{{forloop.counter}}" method="post" action="/EleveCEM/Modification/{{i.id}}">
+            {% csrf_token %}
+          <form>
+            <div class="mb-3">
+            <div class="form-text"> <strong>Informations Personnelles</strong></div>
+            <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="nomCEM" placeholder="Nom d'élèves" value="{{ i.nom_eleveMCEM }}">
+            <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="prenomCEM" placeholder="Prenom d'élèves" value="{{ i.prenom_eleveMCEM }}">
+            <!-- <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="genreCEM" placeholder="Genre" value="{{ i.genre_eleveMCEM }}"> -->
+            <select class="form-select" aria-label="Genre" name="genreCEM" placeholder="Genre" >
+              <option value="{{ i.genre_eleveMCEM  }}">{{ i.genre_eleveMCEM  }}</option>
+              <option value="Garçon">Garçon</option>
+              <option value="Fille">Fille</option>
+            </select>
+            <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="numtelCEM" placeholder="N'Telephone" value="{{ i.num_tel_parentMCEM }}">
+            <!-- <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock"  name="anneescolCEM" placeholder="Année Scolaire" value="{{ i.anneescol_eleveMCEM }}">   -->
+            <select class="form-select" aria-label="Année Scolaire"  name="anneescolCEM" placeholder="Année Scolaire">
+              <option value="{{ i.anneescol_eleveMCEM }}">{{ i.anneescol_eleveMCEM  }}</option>
+
+              <option value="1ere Année">1ere Année</option>
+
+              <option value="2eme Année">2eme Année</option>
+
+              <option value="3eme Année">3eme Année </option>
+
+              <option value="4eme Année">4eme Année</option>
+            </select>  
+            <input type="number" min="1" step="1" class="form-control mt-2" name="ageCEM" placeholder="Age d'élèves" value="{{ i.age_eleveMCEM }}">            
+            <input type="describedby" class="form-control mt-2" aria-describedby="textHelpBlock"  name="descriptionCEM" placeholder="description" value="{{ i.descr_eleveMCEM }}"> 
+            <input type="text" class="form-control mt-2" aria-describedby="textHelpBlock" name="nomProfCEM" placeholder="Nom du Prof" value="{{ i.nom_profMCEM }}">             
+            <!-- <input type="text" class="form-control mt-2" name="fraisCEM" aria-describedby="textHelpBlock" placeholder="Frais de Paiement" value="{{ i.frais_eleveMCEM }}"> -->
+            <select class="form-select" aria-label="frais"  name="fraisCEM" placeholder="Frais de Paiement" >
+              <option value="{{ i.frais_eleveMCEM }}">{{ i.frais_eleveMCEM }}</option>
+              <option value="Payé 1 seance">Payé 1 seance</option>
+              <option value="Payé 2 seances">Payé 2 seances</option>
+              <option value="Payé 3 seances">Payé 3 seances</option>
+              <option value="Payé 4 seances">Payé 4 seances</option>
+              <option value="non Payé">Non Payé</option>
+            </select>
+            <select class="form-select" aria-label="statut" name="statutCEM" placeholder="Statut d'eleve">
+              <option value="{{ i.statut_eleveMCEM }}">{{ i.statut_eleveMCEM }}</option>
+              <option value="En action">En action</option>
+              <option value="N'est pas en action">N'est pas en action</option>
+            </select>
+          </div>
+        </form> 
+        </div>
+        <div class="modal-footer">
+          <button  type="submit" class="btn btn-primary" onclick="document.querySelector('#addm-{{forloop.counter}}').submit()"  data-bs-dismiss="modal" data-bs-toggle="modal">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    
+    {% load static %}
+    <script src="{% static 'js/eleve.js'%}"></script> 
+    <script src="{% static 'js/bootstrap.min.js'%}"></script> 
+    <script src="{% static 'js/search.js' %}"></script>  
+    <script src="{% static 'js/snippets.js' %}"></script>  
+
+    <script>
+        $(document).ready(function() {
+          $('#example1').dataTable( {
+              
+              "bDestroy": true,
+              "aLengthMenu": [[ 5, 10, 25, 50, -1], [ 5, 10, 25, 50, "All"]],
+              "iDisplayLength" : 5
+             
+          } );
+      } );
+      </script>
+
+      <script type="text/javascript">
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            w=window.open();
+            w.document.write(printContents);
+            w.print();
+            w.close();
+        }
+    </script>
+</body>

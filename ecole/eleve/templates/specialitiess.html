@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<head>
+  {% load static%}
+  <link href="{% static 'css/cover.css '%}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Prosperity 1!</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}"> 
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  
+
+    <link rel="icon" type="image/x-icon" href=" {% static 'img/favicon.ico'%}">
+
+   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+-->
+</head>
+<body>
+    <div class="nourbody">  
+
+    <div class="masthead clearfix">
+        <div class="container inner">
+          <nav>
+            <ul class="nav masthead-nav">
+              <a class="nav-link active " href="{% url 'home' %}">Acceuil</a>
+              <a class="nav-link" href="{% url 'logout' %}">Deconnecter</a></p>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        {% load static %} <img class="card-img-top" src="{% static "img/prescolaire.jpg" %}" alt="home" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Pré-scolaire</h5>
+                                <!-- Product price-->
+                                Pour accéder à la liste appuyer ici:
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"  href="{% url 'elevePre' %}">Voir la Liste</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>-->
+                        <!-- Product image-->
+                        {% load static %} <img class="card-img-top" src="{% static "img/primaire.jpg" %}" alt="home" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Primaire</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price
+                                <span class="text-muted text-decoration-line-through">$20.00</span>-->
+                                Pour accéder à la liste appuyer ici:
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"  href="{% url 'elevePrim' %}">Voir la Liste</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Sale badge
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>-->
+                        <!-- Product image-->
+                        {% load static %} <img class="card-img-top" src="{% static "img/cem.jpg" %}" alt="home" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">CEM</h5>
+                                <!-- Product price-->
+                               <!-- <span class="text-muted text-decoration-line-through">$50.00</span>-->
+                               Pour accéder à la liste appuyer ici:
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"  href="{% url 'eleveCEM' %}">Voir la Liste</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image-->
+                        {% load static %} <img class="card-img-top" src="{% static "img/graduation.jpg" %}" alt="home" />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Lycée</h5>
+                                <!-- Product reviews-->
+                                <div class="d-flex justify-content-center small text-warning mb-2">
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                    <div class="bi-star-fill"></div>
+                                </div>
+                                <!-- Product price-->
+                                Pour accéder à la liste appuyer ici:
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto"  href="{% url 'eleve' %}">Voir la Liste</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+{% load static %}
+<script src="{% static 'js/eleve.js'%}"></script> 
+<script src="{% static 'js/bootstrap.min.js'%}"></script> 
+
+<script>
+    $(document).ready(function() {
+      $('#example1').dataTable( {
+          
+          "bDestroy": true,
+          "aLengthMenu": [[ 5, 10, 25, 50, -1], [ 5, 10, 25, 50, "All"]],
+          "iDisplayLength" : 5
+         
+      } );
+  } );
+  </script>
+</body>

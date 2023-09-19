@@ -1,0 +1,15 @@
+
+  {% extends 'base.html' %}
+
+  {% block title %}Connecter{% endblock %}
+  
+  {% block content %}
+  <br>  <br>  <br>  <br> <br>
+  <h2>Connectez-vous</h2>
+  <br>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-lg btn-default">Connecter</button>
+  </form>
+  {% endblock %}

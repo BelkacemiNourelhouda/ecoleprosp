@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="container">
+
+          <div class="masthead clearfix">
+            <div class="container inner">
+              <nav>
+                <ul class="nav masthead-nav">
+                  <a class="nav-link active " color:"#df6e04" href="{% url 'specialitiess' %}">Prosperity 1!</a>
+                  <a class="nav-link active" href="{% url 'specialities' %}">Prosperity 2!</a>
+                  <a class="nav-link" href="{% url 'logout' %}">Deconnecter</a></p>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading"> Salut {{ user.username }}!</h1>
+            <h1 class="cover-heading"> مرحبا بروسبريتي سكول</h1>
+
+            <p class="lead">مدرسة بروسبريتي للغات والتكوين والدروس الخصوصية ترحب بكم</p>
+            <p class="lead">
+              <a href="https://www.facebook.com/prosperityschooldz/" class="btn btn-lg btn-default">CONTACT</a>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+{% else %}
+  <div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+      <div class="container">
+        <div class="inner cover">
+          <h1 class="cover-heading"> Salut {{ user.username }}!</h1>
+          <h1 class="cover-heading"> مرحبا بروسبريتي سكول</h1>
+<br>
+          <p class="lead">vous n'etes pas connectes</p>
+          <p class="lead">
+            <a href="{% url 'login' %}" class="btn btn-lg btn-default">Connectez-vous</a>
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+{% endif %}
+
+{% endblock %}
